@@ -5,8 +5,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response 
 from rest_framework import status
 
-@api_view(['GET', 'POST'])
-# @permission_classes([AllowAny])   
+@api_view(['GET', 'POST'])  
 def movie_list(request): 
     if request.method=='GET':
         movies = Movie.objects.all() 
@@ -33,6 +32,7 @@ def movie_details(request,pk):
         #     return Response(serializer.data) 
         
         if request.method=='GET': 
+            movie=Movie.objects.get(pk=pk) 
             serializer = MovieSerializer(movie) 
             return Response(serializer.data) 
         
