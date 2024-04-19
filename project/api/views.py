@@ -1,5 +1,3 @@
-from django.shortcuts import render
-
 # Create your views here.
 from api.models import Movie 
 from api.serializers import MovieSerializer 
@@ -7,10 +5,10 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response 
 from rest_framework import status
 
-@api_view(['GET', 'POST'])  
-@permission_classes([AllowAny])   
+@api_view(['GET', 'POST'])
+# @permission_classes([AllowAny])   
 def movie_list(request): 
-    if request.method=='GET': 
+    if request.method=='GET':
         movies = Movie.objects.all() 
         serializer=MovieSerializer(movies,many=True)
         return Response(serializer.data) 
@@ -42,4 +40,4 @@ def movie_details(request,pk):
         movie=Movie.objects.get(pk=pk) 
         movie.delete() 
         return Response({'error':"Data deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
-    
+     
